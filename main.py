@@ -1,9 +1,18 @@
-def shipping_label(*args, **kwargs):
-    for arg in args:
-        print(arg, end=" ")
+def add_sprinkles(func):
+    def wrapper(*args, **kwargs):
+        print("*You add sprinkles*")
+        func(*args, **kwargs)
+    return wrapper
 
-    print()
-    for value in kwargs.values():
-        print(value, end="\n")
+def add_fudge(func):
+    def wrapper(*args, **kwargs):
+        print("*You add fudge*")
+        func(*args, **kwargs)
+    return wrapper
 
-shipping_label("Dr.", "Spongebob", "Squarepants", "III", street="123 Fake str.", apartment="100", state="MI")
+@add_sprinkles
+@add_fudge
+def get_ice_cream(flavor):
+    print(f"Here is your {flavor} ice cream!")
+
+get_ice_cream("chocolate")
